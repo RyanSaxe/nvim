@@ -2,8 +2,14 @@ return {
 
   { -- Linting
     'mfussenegger/nvim-lint',
+    dependencies = {
+      'rshkarin/mason-nvim-lint', -- bridges Mason <-> nvim-lint
+    },
     event = { 'BufReadPre', 'BufNewFile' },
     config = function()
+      require('mason-nvim-lint').setup {
+        ensure_installed = { 'ruff', 'mypy', 'markdownlint' },
+      }
       local lint = require 'lint'
       lint.linters_by_ft = {
         markdown = { 'markdownlint' },
