@@ -1,4 +1,4 @@
----@module 'lazy'
+-- ---@module 'lazy'
 
 return {
   {
