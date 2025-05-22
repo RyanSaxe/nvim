@@ -1,4 +1,5 @@
 --lsp customizations
+--another comment
 return {
   {
     "neovim/nvim-lspconfig",
