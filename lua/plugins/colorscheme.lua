@@ -18,7 +18,7 @@ return {
       hl["@number.float"] = muted_literal
       hl["@boolean"] = muted_literal
       -- types and constants should clearly be readable
-      hl["@type"] = { fg = c.green1 }
+      hl["@type"] = { fg = c.teal }
       hl["@type.builtin"] = "@type"
       hl["@constant.builtin"] = "@type"
       hl["@constant"] = { fg = c.magenta2 }
@@ -39,12 +39,12 @@ return {
       hl["@keyword.risky"] = { fg = c.bg, bg = c.magenta2 }
       hl["@keyword.error"] = { fg = c.red }
       -- make variables overall very clear and readable, with a blue theme
-      hl["@variable.builtin"] = { fg = c.magenta }
+      hl["@variable.builtin"] = { fg = c.orange }
       hl["@variable"] = { fg = c.blue6 }
       hl["@variable.member"] = { fg = c.blue5 }
       hl["@variable.parameter"] = { fg = c.blue6 }
       -- ensure punctuation and operations are clear and not distracting
-      hl["@operator"] = { fg = c.cyan }
+      hl["@operator"] = { fg = c.magenta }
       hl["@punctuation.delimiter"] = { fg = c.purple }
       hl["@punctuation.bracket"] = { fg = c.purple }
       hl["@punctuation.special"] = { fg = c.purple }
