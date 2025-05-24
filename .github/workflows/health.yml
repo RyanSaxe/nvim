@@ -15,8 +15,11 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install Neovim & deps
-        run: sudo bash scripts/install.sh
-
+        run: |
+          if [[ "${{ runner.os }}" == "Linux" ]]; then
+            sudo bash scripts/install.sh
+          else
+            bash scripts/install.sh
       - name: Run :checkhealth
         run: |
           nvim --headless "+checkhealth" +qa > health.log 2>&1
