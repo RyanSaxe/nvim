@@ -20,6 +20,7 @@ jobs:
             sudo bash scripts/install.sh
           else
             bash scripts/install.sh
+          fi
       - name: Run :checkhealth
         run: |
           nvim --headless "+checkhealth" +qa > health.log 2>&1
