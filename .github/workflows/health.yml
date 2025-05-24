@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install Neovim & deps
-        run: bash scripts/install.sh
+        run: sudo bash scripts/install.sh
 
       - name: Run :checkhealth
         run: |
