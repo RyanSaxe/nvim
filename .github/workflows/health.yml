@@ -10,7 +10,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest]
+        os: [ubuntu-latest, macos-latest]
 
     steps:
       - uses: actions/checkout@v4
@@ -24,13 +24,22 @@ jobs:
           else
             bash scripts/install.sh
           fi
-
-      - name: Run :checkhealth
+      - name: Run Neovim healthcheck
         shell: bash
         run: |
           set -e
-          nvim --headless "+checkhealth" +qa >health.log 2>&1
-          tee health.log | grep -Eiq 'ERROR|FAIL' && {
-            echo "::error ::Neovim healthcheck failed"
+
+          # run checkhealth and save everything
+          nvim --headless "+checkhealth" +qa > health.log 2>&1
+
+          # always print the full log so you can eyeball warnings, etc.
+          echo "=== Neovim health.log ==="
+          cat health.log
+          echo "=== end health.log ==="
+
+          # then grep for failures (no -q so matches are shown)
+          if grep -En 'ERROR|FAIL' health.log; then
+            echo "::error ::Neovim healthcheck found ERROR or FAIL"
             exit 1
-          }
+          fi
+
