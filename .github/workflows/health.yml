@@ -1,32 +1,36 @@
 name: Neovim health check
 
 on:
-  pull_request:
   push:
-    branches: [ main ]
+    branches: [main]
+  pull_request:
 
 jobs:
   health:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-14,ubuntu-latest, windows-latest] 
+        os: [macos-14, ubuntu-latest, windows-latest]
+
     steps:
       - uses: actions/checkout@v4
 
       - name: Install Neovim & deps
+        shell: bash
         run: |
-          if [[ "${{ runner.os }}" == "Linux" ]]; then
+          set -e
+          if [[ "$RUNNER_OS" == "Linux" ]]; then
             sudo bash scripts/install.sh
           else
             bash scripts/install.sh
           fi
+
       - name: Run :checkhealth
+        shell: bash
         run: |
-          nvim --headless "+checkhealth" +qa > health.log 2>&1
-          cat health.log 
-          if grep -E 'ERROR|FAIL' health.log; then
+          set -e
+          nvim --headless "+checkhealth" +qa >health.log 2>&1
+          tee health.log | grep -Eiq 'ERROR|FAIL' && {
             echo "::error ::Neovim healthcheck failed"
             exit 1
-          fi
-
+          }
