@@ -51,7 +51,7 @@ return {
       -- Finally, just miscellaneous color shifts I prefer
       hl["@keyword.import"] = { fg = c.magenta }
       hl["@module"] = { fg = c.orange }
-      hl["@constructor"] = { fg = c.orange }
+      hl["@constructor"] = { fg = c.yellow }
     end,
   },
 }
