@@ -16,10 +16,10 @@ detect_pm() {
   err "No supported package manager found"; exit 1
 }
 
-BREW_DEPS=(neovim ripgrep lazygit fzf fd node git)
-APT_DEPS=(neovim ripgrep fzf fd-find nodejs npm git build-essential)
-DNF_DEPS=(neovim ripgrep lazygit fzf fd-find nodejs git)
-PACMAN_DEPS=(neovim ripgrep lazygit fzf fd nodejs git)
+BREW_DEPS=(neovim ripgrep lazygit fzf fd git)
+APT_DEPS=(neovim ripgrep fzf fd-find git build-essential)
+DNF_DEPS=(neovim ripgrep lazygit fzf fd-find git)
+PACMAN_DEPS=(neovim ripgrep lazygit fzf fd git)
 
 install_brew() {
   brew update --quiet || true
